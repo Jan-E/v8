@@ -31,7 +31,7 @@ install:
   - cd C:\projects
   - rem git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
   - rem cd C:\projects\depot_tools
-  - rem fetch V8
+  - rem call fetch V8
   - rem cd C:\projects\depot_tools\v8
   - rem call git fetch origin master
   - rem call git checkout master

@@ -20,4 +20,5 @@ cd C:\projects
 if exist depot_tools.7z del depot_tools.7z
 7z.exe a depot_tools.7z depot_tools
 cd C:\projects\depot_tools\v8\%v8_branch%\%v8_platform%.release
-dir *.exe *.dll *.lib
+dir *.exe *.dll *.lib *.gn
+

@@ -7,7 +7,7 @@ set GYP_MSVS_VERSION=2017
 set DEPOT_TOOLS_WIN_TOOLCHAIN=0
 set GYP_CHROMIUM_NO_ACTION=0
 cd C:\projects\depot_tools
-fetch V8
+call fetch V8
 cd C:\projects\depot_tools\v8
 call git fetch origin master
 call git checkout master
