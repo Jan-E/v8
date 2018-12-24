@@ -1,0 +1,34 @@
+version: V8-{branch}.{build}
+
+os: Visual Studio 2017
+
+clone_folder: C:\projects
+shallow_clone: true
+
+skip_tags: true
+
+matrix:
+  fast_finish: true
+
+cache:
+
+environment:
+
+  matrix:
+    - v8_platform:  "x64"
+      v8_vstudio:   "VS2017"
+      v8_vcversion: "vc15"
+      v8_toolset:   "v141"
+      v8_branch:    "7.2-lgkr"
+
+install:
+  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat" %v8_platform%
+  - dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\afxwin*.h" /s
+  - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+  - set PATH=C:\projects\depot_tools;%PATH%
+
+build_script:
+  - cd \prokects
+  - dir
+  
+test: off
