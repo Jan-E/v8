@@ -55,5 +55,7 @@ build_script:
   - dir *.exe *.dll *.lib *.gn
 
 test_script:
+  - cd C:\projects\depot_tools\v8
+  - call python tools/run-tests.py --progress=verbose --mode Release --outdir %v8_branch%\%v8_platform%.release --buildbot --timeout=200 --random-seed=975877910 bot_default --variants=more,dev --rerun-failures-count=2 --mastername client.v8 --buildername V8 Win64 - msvc --swarming
   - cd C:\projects\depot_tools\v8\%v8_branch%\%v8_platform%.release
   - unittests.exe
