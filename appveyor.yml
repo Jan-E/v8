@@ -24,11 +24,12 @@ environment:
 install:
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat" %v8_platform%
   - dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\afxwin*.h" /s
+  - set include=%include%;"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\atlmfc\include"
   - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
   - set PATH=C:\projects\depot_tools;%PATH%
 
 build_script:
-  - cd \prokects
+  - cd \projects
   - dir
   
 test: off
