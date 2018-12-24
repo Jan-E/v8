@@ -19,7 +19,7 @@ environment:
       v8_vstudio:   "VS2017"
       v8_vcversion: "vc15"
       v8_toolset:   "v141"
-      v8_branch:    "7.2-lgkr"
+      v8_branch:    "7.2-lkgr"
 
 install:
   - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars32.bat" %v8_platform%
@@ -31,7 +31,18 @@ install:
   - fetch V8
 
 build_script:
-  - cd \projects
-  - dir
-  
+  - cd \projects\depot_tools
+  - set GYP_MSVS_VERSION=2017
+  - set VC=15
+  - set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+  - set GYP_CHROMIUM_NO_ACTION=0
+  - call git fetch origin %v8_branch%
+  - call git pull --depth 1
+  - call git checkout %v8_branch%
+  - call gclient sync
+  - call gn gen %v8_branch%\%v8_platform%.release --args="is_component_build=true is_debug=false v8_use_snapshot=false target_cpu=\"%v8_platform%\"" --ide=vs
+  - cd %v8_branch%\%v8_platform%.release
+  - msbuild all.sln
+  - dir *.exe *.dll *.lib
+
 test: off
