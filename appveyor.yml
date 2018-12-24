@@ -27,6 +27,8 @@ install:
   - set include=%include%;"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\atlmfc\include"
   - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
   - set PATH=C:\projects\depot_tools;%PATH%
+  - cd C:\projects\depot_tools
+  - fetch V8
 
 build_script:
   - cd \projects
