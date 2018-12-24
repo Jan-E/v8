@@ -14,4 +14,5 @@ call git checkout master
 call git pull
 call gclient sync
 cd C:\projects
+if exist depot_tools.7z del depot_tools.7z
 7z.exe a depot_tools.7z depot_tools

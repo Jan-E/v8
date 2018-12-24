@@ -22,9 +22,7 @@ environment:
       v8_branch:    "7.2-lkgr"
 
 install:
-  - call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvarsall.bat" %v8_platform%
-  - dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\afxwin*.h" /s
-  - set include=%include%;"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\atlmfc\include"
+  - set platform=%v8_platform%
   - cd C:\projects
   - curl -k -fSL -o depot_tools.7z https://phpdev.toolsforresearch.com/depot_tools.7z
   - if exist depot_tools rd depot_tools /s /q
@@ -41,9 +39,12 @@ build_script:
   - call git checkout %v8_branch%
   - call git pull --depth 1
   - call gclient sync
-  - call gn gen out.gn\%v8_platform%.release --args="is_component_build=true is_debug=false v8_use_snapshot=false target_cpu=\"%v8_platform%\"" --ide=vs
-  - ninja -C out.gn\%v8_platform%.release
-  - cd C:\projects\depot_tools\v8\out.gn\%v8_platform%.release
+  - call gn gen %v8_branch%\%v8_platform%.release --args="is_component_build=true is_debug=false v8_use_snapshot=false target_cpu=\"%v8_platform%\"" --ide=vs
+  - type %v8_branch%\%v8_platform%.release\args.gn
+  - dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\afxwin*.h" /s
+  - set include=%include%;"C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Tools\MSVC\14.16.27023\atlmfc\include"
+  - ninja -C %v8_branch%\%v8_platform%.release
+  - cd C:\projects\depot_tools\v8\%v8_branch%\%v8_platform%.release
   - dir *.exe *.dll *.lib
 
 test: off
