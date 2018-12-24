@@ -32,7 +32,7 @@ install:
 
 build_script:
   - cd \projects\depot_tools\v8
-  - set PATH=C:\projects\depot_tools\v8;%PATH%
+  - set PATH=C:\projects\depot_tools;C:\projects\depot_tools\v8;%PATH%
   - set GYP_MSVS_VERSION=2017
   - set VC=15
   - set DEPOT_TOOLS_WIN_TOOLCHAIN=0
