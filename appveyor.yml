@@ -29,18 +29,18 @@ install:
   - set DEPOT_TOOLS_WIN_TOOLCHAIN=0
   - set GYP_CHROMIUM_NO_ACTION=0
   - cd C:\projects
-  - git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
-  - cd C:\projects\depot_tools
-  - fetch V8
-  - cd C:\projects\depot_tools\v8
-  - call git fetch origin master
-  - call git checkout master
-  - call git pull
-  - call gclient sync
+  - rem git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
+  - rem cd C:\projects\depot_tools
+  - rem fetch V8
+  - rem cd C:\projects\depot_tools\v8
+  - rem call git fetch origin master
+  - rem call git checkout master
+  - rem call git pull
+  - rem call gclient sync
   - rem previous lines moved to install.bat to circumvent Appveyor time limit of 59:59m
-  - rem curl -k -fSL -o depot_tools.7z https://phpdev.toolsforresearch.com/depot_tools.7z
-  - rem if exist depot_tools rd depot_tools /s /q
-  - rem 7z.exe x depot_tools.7z
+  - curl -k -fSL -o depot_tools.7z https://phpdev.toolsforresearch.com/depot_tools.7z
+  - if exist depot_tools rd depot_tools /s /q
+  - 7z.exe x depot_tools.7z
 
 build_script:
   - cd \projects\depot_tools\v8
@@ -49,11 +49,11 @@ build_script:
   - rem call git pull --depth 1
   - call gclient sync
   - call gn gen %v8_branch%\%v8_platform%.release --args="is_component_build=true is_debug=false v8_use_snapshot=false target_cpu=\"%v8_platform%\"" --ide=vs
-  - rem ninja -C %v8_branch%\%v8_platform%.release
+  - ninja -C %v8_branch%\%v8_platform%.release
   - rem previous lines moved to build.bat to circumvent Appveyor time limit of 59:59m
   - cd C:\projects\depot_tools\v8\%v8_branch%\%v8_platform%.release
   - dir *.exe *.dll *.lib *.gn
 
 test_script:
-  - rem cd C:\projects\depot_tools\v8\%v8_branch%\%v8_platform%.release
-  - rem unittests.exe
+  - cd C:\projects\depot_tools\v8\%v8_branch%\%v8_platform%.release
+  - unittests.exe
