@@ -29,6 +29,7 @@ cd C:\projects
 if exist depot_tools.7z del depot_tools.7z
 7z.exe a -mx9 depot_tools.7z depot_tools
 cd C:\projects\depot_tools\v8\%v8_branch%\%v8_platform%.release
+if exist C:\projects\%v8_branch%-%v8_platform%-vc%VC% rd C:\projects\%v8_branch%-%v8_platform%-vc%VC% /s /q
 xcopy v8*.lib C:\projects\%v8_branch%-%v8_platform%-vc%VC%\lib\ /y
 xcopy v8*.dll C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y
 xcopy v8*.dll.pdb C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y
