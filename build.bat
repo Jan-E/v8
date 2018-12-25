@@ -27,7 +27,7 @@ if exist ucrt*.* del ucrt*.*
 if exist dbg*.* del dbg*.*
 cd C:\projects
 if exist depot_tools.7z del depot_tools.7z
-7z.exe a -m9 depot_tools.7z depot_tools
+7z.exe a -mx9 depot_tools.7z depot_tools
 cd C:\projects\depot_tools\v8\%v8_branch%\%v8_platform%.release
 xcopy v8*.lib C:\projects\%v8_branch%-%v8_platform%-vc%VC%\lib\ /y
 xcopy v8*.dll C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y
@@ -39,4 +39,4 @@ xcopy icu*.dat C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y
 xcopy *exe* C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y
 xcopy C:\projects\depot_tools\v8\include\*.h C:\projects\%v8_branch%-%v8_platform%-vc%VC%\include\ /s /y
 cd C:\projects
-7z.exe a -m9 %v8_branch%-%v8_platform%-vc%VC%.7z %v8_branch%-%v8_platform%-vc%VC%
+7z.exe a -mx9 %v8_branch%-%v8_platform%-vc%VC%.7z %v8_branch%-%v8_platform%-vc%VC%

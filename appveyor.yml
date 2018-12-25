@@ -72,7 +72,7 @@ build_script:
   - xcopy C:\projects\depot_tools\v8\include\*.h C:\projects\%v8_branch%-%v8_platform%-vc%VC%\include\ /s /y > nul
   - cd C:\projects
   - if exist %v8_branch%-%v8_platform%-vc%VC%.7z del %v8_branch%-%v8_platform%-vc%VC%.7z
-  - 7z.exe a -m9 %v8_branch%-%v8_platform%-vc%VC%.7z %v8_branch%-%v8_platform%-vc%VC%
+  - 7z.exe a -mx9 %v8_branch%-%v8_platform%-vc%VC%.7z %v8_branch%-%v8_platform%-vc%VC%
 
 test_script:
   - rem cd C:\projects\depot_tools\v8
