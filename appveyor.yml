@@ -42,8 +42,11 @@ install:
   - if exist depot_tools rd depot_tools /s /q
   - 7z.exe x depot_tools.7z
 
+artifacts:
+  - path: "%v8_branch%-%v8_platform%-vc%VC%.7z"
+
 build_script:
-  - cd \projects\depot_tools\v8
+  - cd C:\projects\depot_tools\v8
   - call git fetch origin %v8_branch%
   - call git checkout %v8_branch%
   - rem call git pull --depth 1
@@ -52,7 +55,19 @@ build_script:
   - rem ninja -C %v8_branch%\%v8_platform%.release
   - rem previous lines moved to build.bat to circumvent Appveyor time limit of 59:59m
   - cd C:\projects\depot_tools\v8\%v8_branch%\%v8_platform%.release
-  - dir *.exe *.dll *.lib *.gn
+  - if exist api*.dll del api*.dll
+  - if exist pgosweep.exe del pgosweep.exe
+  - xcopy v8*.lib C:\projects\%v8_branch%-%v8_platform%-vc%VC%\lib\ /y
+  - xcopy v8*.dll C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y
+  - xcopy v8*.dll.pdb C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y > nul
+  - xcopy icu*.lib C:\projects\%v8_branch%-%v8_platform%-vc%VC%\lib\ /y
+  - xcopy icu*.dll C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y
+  - xcopy icu*.dll.pdb C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y > nul
+  - xcopy icu*.dat C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y > nul
+  - xcopy *exe* C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y > nul
+  - xcopy C:\projects\depot_tools\v8\include\*.h C:\projects\%v8_branch%-%v8_platform%-vc%VC%\include\ /s /y > nul
+  - cd C:\projects
+  - 7z.exe a %v8_branch%-%v8_platform%-vc%VC%.7z %v8_branch%-%v8_platform%-vc%VC%
 
 test_script:
   - rem cd C:\projects\depot_tools\v8
@@ -63,6 +78,6 @@ test_script:
   - cctest.exe test-heap/TestSizeOfObjectsVsHeapIteratorPrecision --random-seed=975877910 --no-turbo-verify-allocation --stress-opt --always-opt --nohard-abort & exit 0
   - rem failing in 7.1-lkgr and lkgr (7.3)
   - cctest.exe test-heap/MapRetaining --random-seed=975877910 --no-turbo-verify-allocation --stress-opt --always-opt --nohard-abort & exit 0
-  - inspector-test.exe ..\..\test\inspector\protocol-test.js ..\..\test\inspector\debugger/step-snapshot.js --random-seed=975877910 --no-turbo-verify-allocation --stress-opt --always-opt --nohard-abort --embed "function c(f, ...args) { return f(...args); }" & exit 0
+  - inspector-test.exe C:\projects\\projects\test\inspector\protocol-test.js C:\projects\\projects\test\inspector\debugger/step-snapshot.js --random-seed=975877910 --no-turbo-verify-allocation --stress-opt --always-opt --nohard-abort --embed "function c(f, ...args) { return f(...args); }" & exit 0
   - cctest.exe test-external-string-tracker/ExternalString_ExternalBackingStoreSizeIncreasesAfterExternalization --random-seed=975877910 --no-turbo-verify-allocation --stress-incremental-marking --nohard-abort & exit 0
   - unittests.exe
