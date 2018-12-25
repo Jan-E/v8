@@ -47,10 +47,10 @@ artifacts:
 
 build_script:
   - cd C:\projects\depot_tools\v8
-  - call git fetch origin %v8_branch%
-  - call git checkout %v8_branch%
+  - rem call git fetch origin %v8_branch%
+  - rem call git checkout %v8_branch%
   - rem call git pull --depth 1
-  - call gclient sync
+  - rem call gclient sync
   - rem call gn gen %v8_branch%\%v8_platform%.release --args="is_component_build=true is_debug=false v8_use_snapshot=false target_cpu=\"%v8_platform%\"" --ide=vs
   - rem ninja -C %v8_branch%\%v8_platform%.release
   - rem previous lines moved to build.bat to circumvent Appveyor time limit of 59:59m
