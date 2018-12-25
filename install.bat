@@ -19,20 +19,7 @@ call git fetch origin master
 call git checkout master
 call git pull
 call gclient sync
-cd C:\projects
-if exist depot_tools.7z del depot_tools.7z
-7z.exe a depot_tools.7z depot_tools
-cd C:\projects\depot_tools\v8\%v8_branch%\%v8_platform%.release
-if exist api*.dll del api*.dll
-if exist pgosweep.exe del pgosweep.exe
-xcopy v8*.lib C:\projects\%v8_branch%-%v8_platform%-vc%VC%\lib\ /y
-xcopy v8*.dll C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y
-xcopy v8*.dll.pdb C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y > nul
-xcopy icu*.lib C:\projects\%v8_branch%-%v8_platform%-vc%VC%\lib\ /y
-xcopy icu*.dll C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y
-xcopy icu*.dll.pdb C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y > nul
-xcopy icu*.dat C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y > nul
-xcopy *exe* C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y > nul
-xcopy C:\projects\depot_tools\v8\include\*.h C:\projects\%v8_branch%-%v8_platform%-vc%VC%\include\ /s /y > nul
-cd C:\projects
-7z.exe a %v8_branch%-%v8_platform%-vc%VC%.7z %v8_branch%-%v8_platform%-vc%VC%
+rem cd C:\projects
+rem if exist depot_tools.7z del depot_tools.7z
+rem 7z.exe a depot_tools.7z depot_tools
+rem previous lines moved to build.bat

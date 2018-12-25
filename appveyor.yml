@@ -56,7 +56,11 @@ build_script:
   - rem previous lines moved to build.bat to circumvent Appveyor time limit of 59:59m
   - cd C:\projects\depot_tools\v8\%v8_branch%\%v8_platform%.release
   - if exist api*.dll del api*.dll
-  - if exist pgosweep.exe del pgosweep.exe
+  - if exist pgo*.* del pgo*.*
+  - if exist vc*.* del vc*.*
+  - if exist msvc*.* del msvc*.*
+  - if exist ucrt*.* del ucrt*.*
+  - if exist dbg*.* del dbg*.*
   - xcopy v8*.lib C:\projects\%v8_branch%-%v8_platform%-vc%VC%\lib\ /y
   - xcopy v8*.dll C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y
   - xcopy v8*.dll.pdb C:\projects\%v8_branch%-%v8_platform%-vc%VC%\bin\ /y > nul
