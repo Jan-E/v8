@@ -72,7 +72,7 @@ build_script:
   - xcopy C:\projects\depot_tools\v8\include\*.h C:\projects\%v8_branch%-%v8_platform%-vc%VC%\include\ /s /y > nul
   - cd C:\projects
   - if exist %v8_branch%-%v8_platform%-vc%VC%.7z del %v8_branch%-%v8_platform%-vc%VC%.7z
-  - 7z.exe a %v8_branch%-%v8_platform%-vc%VC%.7z %v8_branch%-%v8_platform%-vc%VC%
+  - 7z.exe a -m9 %v8_branch%-%v8_platform%-vc%VC%.7z %v8_branch%-%v8_platform%-vc%VC%
 
 test_script:
   - rem cd C:\projects\depot_tools\v8
@@ -86,5 +86,4 @@ test_script:
   - inspector-test.exe C:\projects\\projects\test\inspector\protocol-test.js C:\projects\\projects\test\inspector\debugger/step-snapshot.js --random-seed=975877910 --no-turbo-verify-allocation --stress-opt --always-opt --nohard-abort --embed "function c(f, ...args) { return f(...args); }" & exit 0
   - cctest.exe test-external-string-tracker/ExternalString_ExternalBackingStoreSizeIncreasesAfterExternalization --random-seed=975877910 --no-turbo-verify-allocation --stress-incremental-marking --nohard-abort & exit 0
   - unittests.exe & exit 0
-  - rem did unittests.exe fail at '11 tests from BytecodeArrayBuilderTest'?
-
+  - rem did unittests.exe fail or stop at '11 tests from BytecodeArrayBuilderTest'?
