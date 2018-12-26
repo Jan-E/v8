@@ -83,11 +83,19 @@ test_script:
   - rem did unittests.exe fail or stop at '11 tests from BytecodeArrayBuilderTest'?
   - rem failing in 7.1-lkgr (7.1.302.33), using python tools/run-tests.py
   - cctest.exe test-heap/TestSizeOfObjectsVsHeapIteratorPrecision --random-seed=975877910 --no-turbo-verify-allocation --stress-opt --always-opt --nohard-abort & exit 0
-  - rem failing in 7.1-lkgr and lkgr (7.3), using python tools/run-tests.py
+  - rem failing in 7.1-lkgr (7.1.302.33), 7.2-lkgr (7.2.502.16), lkgr (7.3), using python tools/run-tests.py
   - cctest.exe test-heap/MapRetaining --random-seed=975877910 --no-turbo-verify-allocation --stress-opt --always-opt --nohard-abort & exit 0
-  - inspector-test.exe C:\projects\\projects\test\inspector\protocol-test.js C:\projects\\projects\test\inspector\debugger/step-snapshot.js --random-seed=975877910 --no-turbo-verify-allocation --stress-opt --always-opt --nohard-abort --embed "function c(f, ...args) { return f(...args); }" & exit 0
+  - rem failing in 7.1-lkgr (7.1.302.33), 7.2-lkgr (7.2.502.16), lkgr (7.3), using python tools/run-tests.py
+  - inspector-test.exe ..\..\test\inspector\protocol-test.js ..\..\test\inspector\debugger/step-snapshot.js --random-seed=975877910 --no-turbo-verify-allocation --stress-opt --always-opt --nohard-abort --embed "function c(f, ...args) { return f(...args); }" & exit 0
+  - rem failing in 7.1-lkgr (7.1.302.33), 7.2-lkgr (7.2.502.16), lkgr (7.3), using python tools/run-tests.py
   - cctest.exe test-external-string-tracker/ExternalString_ExternalBackingStoreSizeIncreasesAfterExternalization --random-seed=975877910 --no-turbo-verify-allocation --stress-incremental-marking --nohard-abort & exit 0
-  - rem got a timeout in lkgr (7.3) on a Lenovo X220 i5-2520 @ 2.5 Ghz
-  - d8.exe --test ..\..\test\mjsunit\mjsunit.js ..\..\test\mjsunit\tools/compiler-trace-flags.js --random-seed=975877910 --no-turbo-verify-allocation --nohard-abort --allow-natives-syntax --trace-turbo --trace-turbo-graph --trace-turbo-cfg-file=test/mjsunit/tools/turbo.cfg --trace-turbo-path=test/mjsunit/tools & exit 0
-  
-  
+  - rem failed in 7.2-lkgr (7.2.502.16)
+  - cctest.exe test-api/MemoryPressure --random-seed=975877910 --no-turbo-verify-allocation --stress-incremental-marking --nohard-abort & exit 0
+  - rem failed in 7.2-lkgr (7.2.502.16)
+  - cctest.exe test-api/SetFunctionEntryHook --random-seed=975877910 --no-turbo-verify-allocation --noopt --nohard-abort & exit 0
+  - rem failed in 7.2-lkgr (7.2.502.16)
+  - cctest.exe test-api/SetFunctionEntryHook --random-seed=975877910 --no-turbo-verify-allocation --stress-incremental-marking --nohard-abort & exit 0
+  - rem failed in 7.2-lkgr (7.2.502.16)
+  - cctest.exe test-api/SetFunctionEntryHook --random-seed=975877910 --no-turbo-verify-allocation --stress-background-compile --nohard-abort & exit 0
+  - rem failed in 7.2-lkgr (7.2.502.16)
+  - cctest.exe test-api/SetFunctionEntryHook --random-seed=975877910 --no-turbo-verify-allocation --nohard-abort & exit 0

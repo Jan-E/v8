@@ -10,9 +10,7 @@ set DEPOT_TOOLS_WIN_TOOLCHAIN=0
 set GYP_CHROMIUM_NO_ACTION=0
 C:
 cd C:\projects\depot_tools\v8\%v8_branch%\%v8_platform%.release
-rem failing in 7.1-lkgr (7.1.302.33)
-cctest.exe test-heap/TestSizeOfObjectsVsHeapIteratorPrecision --random-seed=975877910 --no-turbo-verify-allocation --stress-opt --always-opt --nohard-abort
-rem failing in 7.1-lkgr and lkgr
+rem failing in 7.1-lkgr (7.1.302.33), 7.2-lkgr (7.2.502.16), lkgr (7.3), using python tools/run-tests.py
 cctest.exe test-heap/MapRetaining --random-seed=975877910 --no-turbo-verify-allocation --stress-opt --always-opt --nohard-abort
 inspector-test.exe ..\..\test\inspector\protocol-test.js ..\..\test\inspector\debugger/step-snapshot.js --random-seed=975877910 --no-turbo-verify-allocation --stress-opt --always-opt --nohard-abort --embed "function c(f, ...args) { return f(...args); }"
 cctest.exe test-external-string-tracker/ExternalString_ExternalBackingStoreSizeIncreasesAfterExternalization --random-seed=975877910 --no-turbo-verify-allocation --stress-incremental-marking --nohard-abort
