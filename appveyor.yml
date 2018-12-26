@@ -87,3 +87,7 @@ test_script:
   - cctest.exe test-heap/MapRetaining --random-seed=975877910 --no-turbo-verify-allocation --stress-opt --always-opt --nohard-abort & exit 0
   - inspector-test.exe C:\projects\\projects\test\inspector\protocol-test.js C:\projects\\projects\test\inspector\debugger/step-snapshot.js --random-seed=975877910 --no-turbo-verify-allocation --stress-opt --always-opt --nohard-abort --embed "function c(f, ...args) { return f(...args); }" & exit 0
   - cctest.exe test-external-string-tracker/ExternalString_ExternalBackingStoreSizeIncreasesAfterExternalization --random-seed=975877910 --no-turbo-verify-allocation --stress-incremental-marking --nohard-abort & exit 0
+  - rem got a timeout in lkgr (7.3) on a Lenovo X220 i5-2520 @ 2.5 Ghz
+  - d8.exe --test ..\..\test\mjsunit\mjsunit.js ..\..\test\mjsunit\tools/compiler-trace-flags.js --random-seed=975877910 --no-turbo-verify-allocation --nohard-abort --allow-natives-syntax --trace-turbo --trace-turbo-graph --trace-turbo-cfg-file=test/mjsunit/tools/turbo.cfg --trace-turbo-path=test/mjsunit/tools & exit 0
+  
+  
