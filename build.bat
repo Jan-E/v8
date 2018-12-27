@@ -14,7 +14,8 @@ call git fetch origin %v8_branch%
 call git checkout %v8_branch%
 call git pull --depth 1
 call gclient sync
-call gn gen %v8_branch%\%v8_platform%.release --args="is_component_build=true is_debug=false v8_use_snapshot=false target_cpu=\"%v8_platform%\"" --ide=vs
+rem https://github.com/nodejs/node/blob/master/common.gypi#L45
+call gn gen %v8_branch%\%v8_platform%.release --args="is_component_build=true is_debug=false v8_use_snapshot=true v8_deprecation_warnings=true v8_imminent_deprecation_warnings=true v8_enable_disassembler=true v8_use_external_startup_data=false v8_enable_handle_zapping=false v8_untrusted_code_mitigations=false v8_enable_pointer_compression=false v8_enable_embedded_builtins=true v8_enable_fast_mksnapshot=false v8_enable_verify_heap=true target_cpu=\"%v8_platform%\"" --ide=vs
 type %v8_branch%\%v8_platform%.release\args.gn
 call ninja -C %v8_branch%\%v8_platform%.release
 @echo on
